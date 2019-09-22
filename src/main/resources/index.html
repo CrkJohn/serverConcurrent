@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <title>index for bn</title>
+    	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    	
+    </head>
+    <body>
+        <h2> How to use the app </h2>
+        <h3> the methods must follow the next structure : /app/{method}</h3>
+        <h3> the images must be jpg</h3>
+        <h3> the html and image files must end with their respective extension</h3>
+ 
+        <form  class="form-inline" action="/apps/greetingparam" method="get">
+            <b> enter your name</b>
+            <div class="form-group mx-sm-3 mb-2">
+			    <input name = "kha" class="form-control" id="inputPassword2" placeholder="Param">
+			 </div>
+			 <button  class="btn btn-primary mb-2">Send</button>     
+        </form>
+        
+        <form class="form-inline" action="/" method="get">
+            <b>Name image</b>
+             <div class="form-group mx-sm-3 mb-2">
+	            <input class="form-control" placeholder="name"   name="img" id="name" />
+	            <button class="btn btn-primary" >Send</button>     
+            </div>   
+        </form>
+        
+        
+
+             
+    </body>
+
+</html>
