@@ -32,22 +32,20 @@ public class ClientHandler implements Runnable {
      */
     public void run() {
         try {
-        	System.out.println("closed  " + clientSocket.isClosed());
-            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+        	PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             String inputLine = null ; String requestUrl = null ;
             while ((inputLine = in.readLine()) != null) {
-    			System.out.println("Received: " + inputLine);
     			if (!in.ready()) {
     				break;
     			}
     			if(inputLine.contains("GET")){
+    				System.out.println("Received: " + inputLine);
     				requestUrl = inputLine.split(" ")[1];
     				System.out.println("Adress to show: "+ requestUrl);
     			}
     		}
-            notFound(out);
-            /*
+            
             
            
             
@@ -64,8 +62,7 @@ public class ClientHandler implements Runnable {
                 notFound(out);
             }
           
-            
-              */
+        
             out.close();
             try {
                 clientSocket.close();

@@ -19,10 +19,10 @@ public class SocketClient {
 	 public static Socket receiveRequest(ServerSocket serverSocket) {
 		    try {
 	            Socket clientSocket = serverSocket.accept();
-	            System.out.println("Readyyy ...");
+	            //System.out.println("Readyyy ...");
 	            return clientSocket;
 	        } catch (IOException e) {
-	            System.err.println("Accept failed.");
+	            //System.err.println("Accept failed.");
 	            System.exit(1);
 	            return null;
 	        }
