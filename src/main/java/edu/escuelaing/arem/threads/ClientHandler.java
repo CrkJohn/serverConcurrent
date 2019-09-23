@@ -16,10 +16,9 @@ import org.reflections.scanners.SubTypesScanner;
 
 public class ClientHandler implements Runnable {
 
-    private static Socket clientSocket;
+    private  Socket clientSocket;
     private static HashMap<String, Handler> hashMap = new HashMap<String, Handler>();
     private static final ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-    private static String requestUrl = "";
     
     public ClientHandler(Socket clientSocket) {
         this.clientSocket = clientSocket;
@@ -33,9 +32,10 @@ public class ClientHandler implements Runnable {
      */
     public void run() {
         try {
+        	System.out.println("closed  " + clientSocket.isClosed());
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            String inputLine = null, pet = null;
+            String inputLine = null ; String requestUrl = null ;
             while ((inputLine = in.readLine()) != null) {
     			System.out.println("Received: " + inputLine);
     			if (!in.ready()) {
@@ -45,7 +45,13 @@ public class ClientHandler implements Runnable {
     				requestUrl = inputLine.split(" ")[1];
     				System.out.println("Adress to show: "+ requestUrl);
     			}
-    		}	
+    		}
+            notFound(out);
+            /*
+            
+           
+            
+            
             if (requestUrl.equals("/")) {
                 readHtml("/index.html",out);
             } else if (requestUrl.contains("/apps")) {
@@ -57,9 +63,15 @@ public class ClientHandler implements Runnable {
             } else {
                 notFound(out);
             }
-      
+          
+            
+              */
             out.close();
-            in.close();
+            try {
+                clientSocket.close();
+            }catch(IOException ioe) {
+                System.out.println("Error closing client connection");
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -109,13 +121,14 @@ public class ClientHandler implements Runnable {
      * @throws IOException
      */
     private static void readApps(String inputLine, PrintWriter out) throws IOException {
-        int idApps = inputLine.indexOf("/apps");
-        String subStrg = "";
-        System.out.println(inputLine + "  line ");
-        for (int ji = idApps; ji < inputLine.length() && inputLine.charAt(ji) != ' '; ++ji) {
-            subStrg += inputLine.charAt(ji);
-        }
+       
         try {
+        	 int idApps = inputLine.indexOf("/apps");
+             String subStrg = "";
+             System.out.println(inputLine + "  line ");
+             for (int ji = idApps; ji < inputLine.length() && inputLine.charAt(ji) != ' '; ++ji) {
+                 subStrg += inputLine.charAt(ji);
+             }
             out.write("HTTP/1.1 200 OK\r\n" + "Content-Type: text/html\r\n" + "\r\n");
             if (subStrg.contains("?")) {
                 int id = subStrg.indexOf('?');
@@ -129,7 +142,7 @@ public class ClientHandler implements Runnable {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            notFound(out);
+            //notFound(out);
         }
       
     }
@@ -141,12 +154,13 @@ public class ClientHandler implements Runnable {
      * @throws IOException
      */
     private static void readHtml(String inputLine , PrintWriter out) throws IOException {
-        int i = inputLine.indexOf('/') + 1;
-        String urlInputLine = "";
-        while (!urlInputLine.endsWith(".html") && i < inputLine.length()) {
-            urlInputLine += (inputLine.charAt(i++));
-        }
+       
         try {
+        	 int i = inputLine.indexOf('/') + 1;
+             String urlInputLine = "";
+             while (!urlInputLine.endsWith(".html") && i < inputLine.length()) {
+                 urlInputLine += (inputLine.charAt(i++));
+             }
             BufferedReader rd = new BufferedReader(
                     new FileReader(classLoader.getResource(urlInputLine).getFile()));
             StringBuffer sb = new StringBuffer();
@@ -159,7 +173,7 @@ public class ClientHandler implements Runnable {
             out.println("\r");
             out.println(sb.toString());
         } catch (Exception e) {
-            notFound(out);
+            //notFound(out);
         }
     }
 
@@ -172,12 +186,13 @@ public class ClientHandler implements Runnable {
      * @throws IOException
      */
     private static void readJpg(String inputLine , PrintWriter out,  OutputStream outStream) throws IOException {
-        String urlInputLine = "";
-        int i = (inputLine.contains("=")) ? inputLine.indexOf("=") + 1 : inputLine.indexOf('/') + 1;
-        while (!urlInputLine.endsWith(".jpg") && i < inputLine.length()) {
-            urlInputLine += (inputLine.charAt(i++));
-        }
+       
         try {
+        	 String urlInputLine = "";
+             int i = (inputLine.contains("=")) ? inputLine.indexOf("=") + 1 : inputLine.indexOf('/') + 1;
+             while (!urlInputLine.endsWith(".jpg") && i < inputLine.length()) {
+                 urlInputLine += (inputLine.charAt(i++));
+             }
             File image = new File(classLoader.getResource(urlInputLine).getFile());
             BufferedImage bImage = ImageIO.read(image);
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -192,7 +207,7 @@ public class ClientHandler implements Runnable {
             outImg.close();
             out.println(outImg.toString());
         } catch (Exception e) {
-            notFound(out);
+            //notFound(out);
         }
     }
 
