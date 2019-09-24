@@ -1,9 +1,9 @@
 # Transformación Digital y a Arquitectura Empresarial.
-## Proyecto primer tercio
+## Servidor concurrente implementado con Thread pool 
 
 ### Serive and FrameWork 
 
-El servidor **No** concurrente capaz de entregar páginas html e imágenes tipo JPG. Igualmente el servidor provee un framework IoC para la construcción de aplicaciones web a partir de POJOS.  aplicación Web desplegada en Heroku.
+El servidor concurrente capaz de entregar páginas html e imágenes tipo JPG. Igualmente el servidor provee un framework IoC para la construcción de aplicaciones web a partir de POJOS.  aplicación Web desplegada en Heroku.
 
 ### Prerequisitos
 
@@ -22,8 +22,8 @@ Si el POJOs tiene parametros se deben pasar de la siguiente manera
 ## Ejecutar
 ### Descagar proyecto y descargar sus dependencias y compilar
 ```console
-arep@arep:~$ git https://github.com/CrkJohn/PY1AREP.git
-arep@arep:~$ cd PY1AREP.git 
+arep@arep:~$ git clone https://github.com/CrkJohn/serverConcurrent.git
+arep@arep:~$ cd serverConcurrent
 arep@arep:~$ mvn package
 ```
 ### Ejecutar app Local sin heroku 
@@ -39,6 +39,10 @@ arep@arep:~$ Heroku local web
 ```console
 arep@arep:~$ mvn javadoc:jar
 ```
+
+### Documentación Arquitectura  y pruebas de concurrencia.[Click aqui.](https://github.com/CrkJohn/serverConcurrent/tree/master/documents)
+
+
 
 ### Deploy
 Para ver la pagina web, [Click aqui](https://py1arep.herokuapp.com/CrkJohn.html)
