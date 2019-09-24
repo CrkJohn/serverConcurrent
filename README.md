@@ -42,6 +42,8 @@ arep@arep:~$ mvn javadoc:jar
 
 ### Documentación Arquitectura  y pruebas de concurrencia.[Click aqui.](https://github.com/CrkJohn/serverConcurrent/tree/master/documents)
 
+El codigo empleado para realizar las pruebas de concurrencia se encuentra [aqui](https://github.com/CrkJohn/requestConcurrentAWS/tree/master/src/requestclientconcurrent)
+
 
 
 ### Deploy
