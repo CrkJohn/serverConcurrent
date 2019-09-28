@@ -10,6 +10,10 @@ El servidor concurrente capaz de entregar páginas html e imágenes tipo JPG. Ig
 * Java 1.8
 * Maven 3.6.0 
 
+### Verificación de cuenta de aws
+
+![](https://github.com/CrkJohn/serverConcurrent/blob/master/documents/Screenshot%20from%202019-09-27%2021-01-41.png)
+
 ### Cómo utilizarla
 Cada POJOs tendra como link /apps/nombreDelPOJos
 
